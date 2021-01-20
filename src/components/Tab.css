@@ -1,0 +1,16 @@
+.BtnTab {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  border: none;
+  background-color: white;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 20px;
+  color:  #61dafb;
+}
+
+.BtnTab a {
+  text-decoration: none;
+  color:  #1891b3;
+}
