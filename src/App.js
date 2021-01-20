@@ -24,11 +24,15 @@ function App() {
       </div>
 
       <div className="Workspace">
-        <ErrorBoundary><LoginForm /></ErrorBoundary>
+        <div className="ListBox">
         <ErrorBoundary><MessageList tabName="received"/></ErrorBoundary>
         <ErrorBoundary><MessageList tabName="sent"/></ErrorBoundary>
+        </div>
+        <div className="WorkBox">
+        <ErrorBoundary><LoginForm /></ErrorBoundary>
         <ErrorBoundary><MessageDetails /></ErrorBoundary>
         <ErrorBoundary><NewMessageForm /></ErrorBoundary>
+        </div>
       </div>
 
     </div>

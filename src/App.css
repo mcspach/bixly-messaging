@@ -1,4 +1,5 @@
 @import './components/Tab.css';
+@import './components/WorkSpace.css';
 
 .App {
   text-align: center;
@@ -49,6 +50,7 @@
 }
 
 .Workspace {
+  display: flex;
   width: 100vw;
   height: 75vh;
   background-color: floralwhite;

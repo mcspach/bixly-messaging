@@ -1,24 +1,26 @@
 import React, { Component } from 'react';
 // import API from './API';
 import axios from 'axios';
+import { computeHeadingLevel } from '@testing-library/react';
 
 class NewMessageForm extends Component {
-  state = {
-      title: "",
-      body: "",
-      receiver: ""
+  constructor() {
+    super();
+    this.state = {
+        title: "",
+        body: "",
+        receiver: ""
+    }
   }
 
   handlePostMessage = (event) => {
     event.preventDefault();
-    const data = {
-      title: this.state.title,
-      body: this.state.title,
-      receiver: this.state.receiver
-    };
 
-    axios.post('messages/', data)
-      .then((response) => {
+    axios.post('messages/', {
+      title: this.state.title,
+      body: this.state.body,
+      receiver: this.state.receiver
+    }).then((response) => {
         console.log(response);
         console.log(response.data);
       })
@@ -26,19 +28,17 @@ class NewMessageForm extends Component {
 
   handleChange = (event) => {
     event.preventDefault();
-    console.log(event.target.name);
-    let newKey = event.target.name;
-    console.log(newKey);
-    this.setState({ newKey: event.target.value });
+    this.setState({ [event.target.name]: event.target.value });
+    console.log(this.state);
   }
 
   render() {
     return(
       <div className="NewMessageForm">
          <form onSubmit={this.handlePostMessage}>
-           <label><input type="text" name="name" onChange={this.handleChange}/>Title</label>
-           <label><input type="textarea" name="body" onChange={this.handleChange}/>Body</label>
-           <label><input type="text" name="receiver" onChange={this.handleChange}/>Recipient</label>
+           <label>Title: <input type="text" name="title" onChange={this.handleChange}/></label>
+           <label>Body: <input type="textarea" name="body" onChange={this.handleChange}/></label>
+           <label>Reciever: <input type="text" name="receiver" onChange={this.handleChange}/></label>
            <button type="submit">Send</button>
          </form>
       </div>
