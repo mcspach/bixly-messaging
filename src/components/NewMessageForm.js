@@ -16,7 +16,7 @@ class NewMessageForm extends Component {
   handlePostMessage = (event) => {
     event.preventDefault();
 
-    axios.post('messages/', {
+    axios.post('/messages/', {
       title: this.state.title,
       body: this.state.body,
       receiver: this.state.receiver

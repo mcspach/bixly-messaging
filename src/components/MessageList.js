@@ -5,7 +5,7 @@ class MessageList extends Component {
   messages = [];
 
   componentDidMount() {
-    axios.get('messages/')
+    axios.get('/messages/')
       .then((response) => {
         console.log(response);
       }
