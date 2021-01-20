@@ -7,26 +7,28 @@ import MessageDetails from './components/MessageDetails';
 import MessageList from './components/MessageList';
 import LoginForm from './components/LoginForm';
 
+import ErrorBoundary from './components/ErrorBoundary';
+
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p> Bixly Messenger </p>
-        {/* <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">Learn React</a> */}
       </header>
 
       <div className="Tabs">
-        <Tab tabName='received' tabRoute='messages' />
-        <Tab tabName='sent' tabRoute='messages/sent' />
-        <Tab tabName='new message' tabRoute='messages' />
+        <ErrorBoundary><Tab tabName='received' tabRoute='messages' /></ErrorBoundary>
+        <ErrorBoundary><Tab tabName='sent' tabRoute='messages/sent' /></ErrorBoundary>
+        <ErrorBoundary><Tab tabName='new message' tabRoute='messages' /></ErrorBoundary>
       </div>
 
       <div className="Workspace">
-        <LoginForm />
-        <MessageList />
-        <MessageDetails />
-        <NewMessageForm />
+        <ErrorBoundary><LoginForm /></ErrorBoundary>
+        <ErrorBoundary><MessageList tabName="received"/></ErrorBoundary>
+        <ErrorBoundary><MessageList tabName="sent"/></ErrorBoundary>
+        <ErrorBoundary><MessageDetails /></ErrorBoundary>
+        <ErrorBoundary><NewMessageForm /></ErrorBoundary>
       </div>
 
     </div>
