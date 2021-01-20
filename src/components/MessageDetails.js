@@ -3,7 +3,10 @@ import React, { Component } from 'react';
 class MessageDetails extends Component {
   render() {
     return(
-      <div className="MessageDetails">This will display message details</div>
+      <div className="MessageDetails">
+        {/* axios.get('message/${params.id}', data)
+        .then(response => ) */}
+      </div>
     )
   }
 }
