@@ -23,7 +23,7 @@ class LoginForm extends Component {
         console.log(response.data);
         this.setState({token: response.data.token});
         console.log(this.state);
-        axios.defaults.baseURL = 'https://messaging-test.bixly.com/';
+        axios.defaults.baseURL = 'https://messaging-test.bixly.com';
         axios.defaults.headers.common['Authorization'] = 'Token ' + this.state.token;
         console.log(axios.defaults);
       })
