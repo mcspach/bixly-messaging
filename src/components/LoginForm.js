@@ -4,9 +4,14 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 class LoginForm extends Component {
-  state = {
-      username: "",
-      password: "",
+
+  constructor() {
+      super();
+      this.state = {
+          username: "",
+          password: "",
+          token: "",
+      };
   }
 
   handlePostMessage = (event) => {
@@ -16,14 +21,14 @@ class LoginForm extends Component {
     axios.post('https://messaging-test.bixly.com/api-token-auth/', {username: this.state.username, password: this.state.password})
       .then((response) => {
         console.log(response.data);
+        this.setState({token: response.data.token});
+        console.log(this.state)
       })
   }
 
   handleChange = (event) => {
     event.preventDefault();
-    let newKey = event.target.name;
-    console.log(newKey);
-    this.setState({ newKey: event.target.value });
+    this.setState({ [event.target.name]: event.target.value });
     console.log(this.state.username);
     console.log(this.state.password);
   }
@@ -46,4 +51,3 @@ class LoginForm extends Component {
 }
 
 export default LoginForm;
-// export { TOKEN };
