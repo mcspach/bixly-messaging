@@ -1,8 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
 import Tab from './components/Tab.js';
-import { Link, Route } from 'react-router-dom';
-
+// import { Link, Route } from 'react-router-dom';
+import NewMessageForm from './components/NewMessageForm';
+import MessageDetails from './components/MessageDetails';
+import MessageList from './components/MessageList';
+import LoginForm from './components/LoginForm';
 
 function App() {
   return (
@@ -21,7 +24,9 @@ function App() {
 
       <div className="Workspace">
         <LoginForm />
-        <
+        <MessageList />
+        <MessageDetails />
+        <NewMessageForm />
       </div>
 
     </div>
