@@ -1,39 +1,43 @@
 import React, { Component } from 'react';
+// import API from './API';
+
 import axios from 'axios';
 
 class LoginForm extends Component {
   state = {
-      title: "",
-      body: "",
-      receiver: ""
+      username: "",
+      password: "",
   }
 
-  handlePostMessage = () => {
-    const data = {
-      title: this.state.title,
-      body: this.state.title,
-      receiver: this.state.receiver
-    };
+  handlePostMessage = (event) => {
+    event.preventDefault();
+    
 
-    axios.post('https://messaging-test.bixly.com/messages/', data)
+    axios.post('https://messaging-test.bixly.com/api-token-auth/', {username: this.state.username, password: this.state.password})
       .then((response) => {
-        console.log(response);
+        console.log(response.data);
       })
   }
 
   handleChange = (event) => {
-    console.log(event.target.name);
+    event.preventDefault();
     let newKey = event.target.name;
+    console.log(newKey);
     this.setState({ newKey: event.target.value });
+    console.log(this.state.username);
+    console.log(this.state.password);
   }
 
   render() {
     return(
       <div className="LoginForm">
          <form onSubmit={this.handlePostMessage}>
-           <label><input type="text" name="name" onChange={this.handleChange}/>Title</label>
-           <label><input type="textarea" name="body" onChange={this.handleChange}/>Body</label>
-           <label><input type="text" name="receiver" onChange={this.handleChange}/>Recipient</label>
+           <label>Username:
+             <input type="text" name="username" onChange={this.handleChange}/>
+            </label>
+           <label>Password:
+             <input type="text" name="password" onChange={this.handleChange}/>
+            </label>
            <button type="submit">Send</button>
          </form>
       </div>
@@ -42,3 +46,4 @@ class LoginForm extends Component {
 }
 
 export default LoginForm;
+// export { TOKEN };
