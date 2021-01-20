@@ -37,11 +37,9 @@ class LoginForm extends Component {
     return(
       <div className="LoginForm">
          <form onSubmit={this.handlePostMessage}>
-           <label>Username:
-             <input type="text" name="username" onChange={this.handleChange}/>
+           <label>Username: <input type="text" name="username" onChange={this.handleChange}/>
             </label>
-           <label>Password:
-             <input type="text" name="password" onChange={this.handleChange}/>
+           <label>Password: <input type="text" name="password" onChange={this.handleChange}/>
             </label>
            <button type="submit">Send</button>
          </form>

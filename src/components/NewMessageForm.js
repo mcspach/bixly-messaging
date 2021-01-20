@@ -36,9 +36,9 @@ class NewMessageForm extends Component {
     return(
       <div className="NewMessageForm">
          <form onSubmit={this.handlePostMessage}>
-           <label><input type="text" name="name" onChange={this.handleChange}/>Title</label>
-           <label><input type="textarea" name="body" onChange={this.handleChange}/>Body</label>
-           <label><input type="text" name="receiver" onChange={this.handleChange}/>Recipient</label>
+           <label>Title: <input type="text" name="name" onChange={this.handleChange}/></label>
+           <label>Body: <input type="textarea" name="body" onChange={this.handleChange}/></label>
+           <label>Reciever: <input type="text" name="receiver" onChange={this.handleChange}/></label>
            <button type="submit">Send</button>
          </form>
       </div>
