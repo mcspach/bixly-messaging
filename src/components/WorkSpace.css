@@ -36,6 +36,13 @@ form input {
 }
 
 /* .MessageList {} */
+.List {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.ListItem {}
 
 
 .MessageDetails {

@@ -19,7 +19,7 @@ function App() {
           <p> Bixly Messenger </p>
         </header>
 
-        <Route path="messages" render={() => 
+        <Route path="/messages" render={() => 
             <div className="Tabs">
               <Tab tabName='received' tabRoute='messages/' />
               <Tab tabName='sent' tabRoute='messages/sent' />

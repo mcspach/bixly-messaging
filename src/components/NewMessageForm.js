@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 // import API from './API';
 import axios from 'axios';
-import { computeHeadingLevel } from '@testing-library/react';
 
 class NewMessageForm extends Component {
   constructor() {
@@ -9,7 +8,8 @@ class NewMessageForm extends Component {
     this.state = {
         title: "",
         body: "",
-        receiver: ""
+        receiver: "",
+        id: ""
     }
   }
 
@@ -22,8 +22,9 @@ class NewMessageForm extends Component {
       receiver: this.state.receiver
     }).then((response) => {
         console.log(response);
-        console.log(response.data);
+        this.setState({id: response.data.id})
       })
+
   }
 
   handleChange = (event) => {
@@ -33,6 +34,7 @@ class NewMessageForm extends Component {
   }
 
   render() {
+    if (this.state.id === "") {
     return(
       <div className="NewMessageForm">
          <form onSubmit={this.handlePostMessage}>
@@ -41,8 +43,14 @@ class NewMessageForm extends Component {
            <label>Reciever: <input type="text" name="receiver" onChange={this.handleChange}/></label>
            <button type="submit">Send</button>
          </form>
-      </div>
-    )
+      </div>)
+    } else {
+      return(
+        <div className="NewMessageForm">
+          <p>Your message was sent.</p>
+        </div>
+      )
+    }
   }
 }
 
