@@ -11,7 +11,7 @@ function SmallMessage(props) {
 
     return(
       <li>
-        <p>props.title</p>
+        <p>{props.title}</p>
       </li>
     )
 }

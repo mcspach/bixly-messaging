@@ -52,7 +52,7 @@ class LoginForm extends Component {
       </div>
     )} else {
       return(
-        <div className="LoginSuccess">
+        <div className="LoginForm">
           <p>You're signed in!</p>
           <Link to="/messages">LOAD MESSAGES</Link>
         </div>
