@@ -1,19 +1,93 @@
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import axios from 'axios';
+
 import logo from './logo.svg';
 import './App.css';
+
 import Tab from './components/Tab';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
 import NewMessageForm from './components/NewMessageForm';
 import MessageDetails from './components/MessageDetails';
 import MessageList from './components/MessageList';
-import LoginForm from './components/LoginForm';
-
 import ErrorBoundary from './components/ErrorBoundary';
 
-function App() {
-  return (
-    
+export default class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+        username: "",
+        password: "",
+        token: "",
+        loggedInRedirect: false,
+        selectedMessage: null
+    };
+}
+
+handleLogin = (event) => {
+  event.preventDefault();
+
+  axios.post('https://messaging-test.bixly.com/api-token-auth/', {username: this.state.username, password: this.state.password})
+    .then((response) => {
+      // console.log(response.data);
+      this.setState({token: response.data.token, loggedInRedirect: true});
+      console.log(this.state);
+      
+      axios.defaults.baseURL = 'https://messaging-test.bixly.com';
+      axios.defaults.headers.common['Authorization'] = 'Token ' + this.state.token;
+    })
+}
+
+redirect = () => {
+  if (this.state.loggedInRedirect) {
+    return( 
+      <ErrorBoundary><Redirect from="/" to="/messages/" /></ErrorBoundary>
+    )
+  } 
+}
+
+handleChange = (event) => {
+  event.preventDefault();
+  this.setState({ [event.target.name]: event.target.value });
+  console.log(this.state);
+}
+
+render() {
+
+  const redirect = () => {
+    if (this.state.loggedInRedirect) {
+      return( 
+        <ErrorBoundary><Redirect from="/" to="/messages/" /></ErrorBoundary>
+      )
+    } 
+  }
+  
+  if (this.state.token === "") {
+  return(
+    <div className="App">
+      <Router>
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <p> Bixly Messenger </p>
+        </header>
+        <div className="WorkSpace">
+          <div className="LoginForm">
+            <form onSubmit={this.handleLogin}>
+              <label>Username: <input type="text" name="username" onChange={this.handleChange}/>
+                </label>
+              <label>Password: <input type="text" name="password" onChange={this.handleChange}/>
+                </label>
+              <button type="submit">Login</button>
+            </form>
+          </div>
+        </div>
+    </Router>
+    </div>
+  )
+  } else {
+    return(
       <div className="App">
       <Router>
+      {redirect()}
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p> Bixly Messenger </p>
@@ -37,8 +111,6 @@ function App() {
           </div>
 
           <div className="WorkBox">
-          <Route path="/" exact render={() =>
-          <ErrorBoundary><LoginForm /></ErrorBoundary>} />
           <Route path="/messages" render={() => 
           <ErrorBoundary><MessageDetails /></ErrorBoundary>} />
           <Route path="/messages/new" exact render={() =>
@@ -48,10 +120,7 @@ function App() {
         </div>
       </Router>
       </div>
-    
-  );
+     );
+    }
+  }
 }
-
-
-
-export default App;
