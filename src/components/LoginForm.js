@@ -54,7 +54,7 @@ class LoginForm extends Component {
       return(
         <div className="LoginForm">
           <p>You're signed in!</p>
-          <Link to="/messages">LOAD MESSAGES</Link>
+          <button className='BtnTab'><Link to="/messages">LOAD MESSAGES</Link></button>
         </div>
       );
     }
