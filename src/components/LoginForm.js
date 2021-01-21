@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import API from './API';
 
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 class LoginForm extends Component {
 
@@ -27,6 +28,7 @@ class LoginForm extends Component {
         axios.defaults.headers.common['Authorization'] = 'Token ' + this.state.token;
         console.log(axios.defaults);
       })
+    
   }
 
   handleChange = (event) => {
@@ -45,7 +47,7 @@ class LoginForm extends Component {
             </label>
            <label>Password: <input type="text" name="password" onChange={this.handleChange}/>
             </label>
-           <button type="submit">Login</button>
+           <button type="submit"><Link to="/messages">Login</Link></button>
          </form>
       </div>
     )} else {
