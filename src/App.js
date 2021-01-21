@@ -19,7 +19,7 @@ function App() {
           <p> Bixly Messenger </p>
         </header>
 
-        <Route path="messages/" render={() => 
+        <Route path="messages" render={() => 
             <div className="Tabs">
               <Tab tabName='received' tabRoute='messages/' />
               <Tab tabName='sent' tabRoute='messages/sent' />
@@ -30,20 +30,21 @@ function App() {
         <div className="Workspace">
 
           <div className="ListBox">
-            <Route path="/messages/" exact render={() => 
+            <Route path="/messages" exact render={() => 
             <ErrorBoundary><MessageList tabName="received" /></ErrorBoundary>} />
             <Route path="/messages/sent" exact render={() => 
             <ErrorBoundary><MessageList tabName="sent" /></ErrorBoundary>} />
           </div>
 
           <div className="WorkBox">
-          <Route/>
-          <ErrorBoundary><LoginForm /></ErrorBoundary>
-          <Route/>
-          <ErrorBoundary><MessageDetails /></ErrorBoundary>
-          <Route/>
-          <ErrorBoundary><NewMessageForm /></ErrorBoundary>
+          <Route path="/" exact render={() =>
+          <ErrorBoundary><LoginForm /></ErrorBoundary>} />
+          <Route path="/messages" render={() => 
+          <ErrorBoundary><MessageDetails /></ErrorBoundary>} />
+          <Route path="/messages/new" exact render={() =>
+          <ErrorBoundary><NewMessageForm /></ErrorBoundary>} />
           </div>
+
         </div>
       </Router>
       </div>

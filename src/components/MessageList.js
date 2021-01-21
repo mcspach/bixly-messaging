@@ -8,6 +8,7 @@ class MessageList extends Component {
     axios.get('/messages/')
       .then((response) => {
         console.log(response);
+        
       }
     );
   }
