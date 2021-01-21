@@ -47,11 +47,16 @@ class LoginForm extends Component {
             </label>
            <label>Password: <input type="text" name="password" onChange={this.handleChange}/>
             </label>
-           <button type="submit"><Link to="/messages">Login</Link></button>
+           <button type="submit">Login</button>
          </form>
       </div>
     )} else {
-      return null;
+      return(
+        <div className="LoginSuccess">
+          <p>You're signed in!</p>
+          <Link to="/messages">LOAD MESSAGES</Link>
+        </div>
+      );
     }
   }
 }
