@@ -21,9 +21,9 @@ function App() {
 
         <Route path="/messages" render={() => 
             <div className="Tabs">
-              <Tab tabName='received' tabRoute='messages/' />
-              <Tab tabName='sent' tabRoute='messages/sent' />
-              <Tab tabName='new message' tabRoute='messages/new' />
+              <Tab tabName='Inbox' tabRoute='messages/' />
+              <Tab tabName='Outbox' tabRoute='messages/sent' />
+              <Tab tabName='Compose' tabRoute='messages/new' />
             </div>
         } />
 
