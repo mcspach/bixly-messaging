@@ -28,10 +28,10 @@ class MessageList extends Component {
 
   renderList = () => {
       if (this.props.tabName === 'received') {
-        this.setState({currentTab: this.state.messages.filter(m => (m.receiver === 'test'))})
+        this.setState({currentTab: this.state.messages.filter(m => m.receiver === 'test')});
         console.log(this.state.currentTab);
       } else if (this.props.tabName === 'sent') { 
-        this.setState({currentTab: this.state.messages.filter(m => (m.sender === 'test'))})
+        this.setState({currentTab: this.state.messages.filter(m => m.sender === 'test')});
         console.log(this.state.currentTab);
       } else {
         return null;
