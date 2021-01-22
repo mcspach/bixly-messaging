@@ -31,12 +31,11 @@ handleLogin = (event) => {
   axios.post('https://messaging-test.bixly.com/api-token-auth/', {username: this.state.username, password: this.state.password})
     .then((response) => {
       // console.log(response.data);
-      this.setState({token: response.data.token});
+      this.setState({token: response.data.token, loggedInRedirect: true});
       console.log(this.state);
-    }).then(response => {
-      this.setState({loggedInRedirect: true});
       axios.defaults.baseURL = 'https://messaging-test.bixly.com';
       axios.defaults.headers.common['Authorization'] = 'Token ' + this.state.token;
+      console.log(this.state);
     })
 }
 
@@ -118,7 +117,7 @@ render() {
           <Route path="/messages/" exact render={() => 
           <ErrorBoundary><MessageDetails /></ErrorBoundary>} />
           <Route path="/messages/new" exact render={() =>
-          <ErrorBoundary><NewMessageForm /></ErrorBoundary>} />
+          <NewMessageForm />} />
           </div>
 
         </div>
