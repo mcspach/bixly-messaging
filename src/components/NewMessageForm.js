@@ -8,7 +8,8 @@ class NewMessageForm extends Component {
     this.state = {
         title: "",
         body: "",
-        receiver: ""
+        receiver: "",
+        id: ""
     }
   }
 
@@ -21,13 +22,9 @@ class NewMessageForm extends Component {
       receiver: this.state.receiver
     }).then((response) => {
         console.log(response);
-        alert("Your message was sent");
-        this.setState({
-          title: "",
-          body: "",
-          receiver: ""
-        });
+        this.setState({id: response.data.id})
       })
+
   }
 
   handleChange = (event) => {
@@ -37,7 +34,7 @@ class NewMessageForm extends Component {
   }
 
   render() {
-    
+    if (this.state.id === "") {
     return(
       <div className="NewMessageForm">
          <form onSubmit={this.handlePostMessage}>
@@ -46,8 +43,14 @@ class NewMessageForm extends Component {
            <label>Reciever: <input type="text" name="receiver" onChange={this.handleChange}/></label>
            <button type="submit">Send</button>
          </form>
-      </div>
+      </div>)
+    } else {
+      return(
+        <div className="NewMessageForm">
+          <p>Your message was sent.</p>
+        </div>
       )
+    }
   }
 }
 
