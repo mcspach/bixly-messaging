@@ -8,7 +8,9 @@ import './App.css';
 import Tab from './components/Tab';
 import NewMessageForm from './components/NewMessageForm';
 import MessageDetails from './components/MessageDetails';
-import MessageList from './components/MessageList';
+import Outbox from './components/Outbox';
+import Inbox from './components/Inbox';
+
 import ErrorBoundary from './components/ErrorBoundary';
 
 export default class App extends Component {
@@ -105,13 +107,13 @@ render() {
 
           <div className="ListBox">
             <Route path="/messages" exact render={() => 
-            <ErrorBoundary><MessageList tabName="received" /></ErrorBoundary>} />
+            <ErrorBoundary><Inbox /></ErrorBoundary>} />
             <Route path="/messages/sent" exact render={() => 
-            <ErrorBoundary><MessageList tabName="sent" /></ErrorBoundary>} />
+            <ErrorBoundary><Outbox /></ErrorBoundary>} />
           </div>
 
           <div className="WorkBox">
-          <Route path="/messages" render={() => 
+          <Route path="/messages/" exact render={() => 
           <ErrorBoundary><MessageDetails /></ErrorBoundary>} />
           <Route path="/messages/new" exact render={() =>
           <ErrorBoundary><NewMessageForm /></ErrorBoundary>} />
