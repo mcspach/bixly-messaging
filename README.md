@@ -18,6 +18,7 @@ When you have signed in, you can load your messages, etc.
 -Additional packages included:
   React-Router-Dom      --- For routing
   Axios     --- For simplifying requests
+  Node Sass     --- For improving css function
   
 
 ## Available Scripts
