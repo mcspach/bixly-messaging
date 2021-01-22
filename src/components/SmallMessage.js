@@ -1,6 +1,7 @@
+import React, { Component } from 'react';
+import axios from 'axios';
 
-
-export default function SmallMessage(props) {
+export default class SmallMessage extends Component {
   // props.title,
   // props.body,
   // props.message,
@@ -8,11 +9,25 @@ export default function SmallMessage(props) {
   // props.sender,
   // props.receiver
 
-  return(
-    <li className="ListItem">
-      <p>{props.title}</p>
-      <button>Delete</button>
-    </li>
-  )
+  handleSelect = event => {
+    event.preventDefault();
+  }
+
+  handleDelete = event => {
+  event.preventDefault();
+  //
+  const response = axios.delete(`/messages/${this.props.id}`);
+  console.log(response);
+  console.log(response.data);
+  }
+
+  render() {
+    return(
+      <li className="ListItem" onClick={this.handleSelect}>
+        <p>{this.props.title}</p>
+        <button onClick={this.handleDelete}>Delete</button>
+      </li>
+    )
+  }
 }
 

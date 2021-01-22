@@ -59,7 +59,7 @@ render() {
   const redirect = () => {
     if (this.state.loggedInRedirect) {
       return( 
-        <ErrorBoundary><Redirect from="/" to="/messages/" /></ErrorBoundary>
+        <ErrorBoundary><Redirect from="/" to="/messages/home" /></ErrorBoundary>
       )
     } 
   }
@@ -107,6 +107,7 @@ render() {
         <div className="Workspace">
 
           <div className="ListBox">
+            <Route path="/messages/home" exact render={() => null} />
             <Route path="/messages" exact render={() => 
             <ErrorBoundary><Inbox /></ErrorBoundary>} />
             <Route path="/messages/sent" exact render={() => 
