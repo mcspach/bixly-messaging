@@ -18,6 +18,12 @@ class Outbox extends Component {
         console.log(this.state.messages);
         });
       }
+
+  handleDelete = (messageId) => {
+    const newMessages = this.state.messages.filter(thing => thing.id !== messageId);
+    this.setState({ messages: newMessages });
+    alert("You deleted a message");
+  }
   
 
   render() {
@@ -26,7 +32,7 @@ class Outbox extends Component {
         <h3>Messages</h3>
         <ul>
           {this.state.messages.map((message) => {
-            return <SmallMessage key={message.id} title={message.title} body={message.body} sender={message.sender} receiver={message.receiver} id={message.id} />
+            return <SmallMessage onDelete={this.handleDelete} key={message.id} title={message.title} body={message.body} sender={message.sender} receiver={message.receiver} id={message.id} />
           })}
         </ul>
       </div>
