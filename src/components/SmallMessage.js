@@ -19,6 +19,8 @@ export default class SmallMessage extends Component {
   const response = axios.delete(`/messages/${this.props.id}`);
   console.log(response);
   console.log(response.data);
+  alert('You deleted a message.');
+  this.props.onDelete(this.props.id);
   }
 
   render() {
