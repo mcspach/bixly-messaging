@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 
 import Tab from './components/Tab';
 import NewMessageForm from './components/NewMessageForm';

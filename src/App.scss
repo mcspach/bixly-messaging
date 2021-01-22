@@ -1,12 +1,23 @@
-@import './components/Tab.css';
-@import './components/WorkSpace.css';
+@import './components/Tab.scss';
+@import './components/WorkSpace.scss';
+
+
+//COLORS
+$yellow: #FFFE4E;
+$darkyellow: #FFE911;
+$white: #FFFEFE;
+$lightgrey: #abada9;
+$grey: #727473;
+$darkgrey: #383a3b;
+$black: #131414;
+
 
 .App {
   text-align: center;
 }
 
 .App-logo {
-  height: 20px;
+  height: 25px;
   pointer-events: none;
 }
 
@@ -17,16 +28,16 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: $darkgrey;
   height: 10vh;
   display: flex;
   align-items: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: $white;
 }
 
 .App-link {
-  color: #61dafb;
+  color: $darkgrey;
 }
 
 @keyframes App-logo-spin {
@@ -43,7 +54,7 @@
 .Tabs {
   width: 100vw;
   height: 15vh;
-  background-color: lightblue;
+  background-color: $yellow;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -53,6 +64,6 @@
   display: flex;
   width: 100vw;
   height: 75vh;
-  background-color: floralwhite;
+  background-color: $lightgrey;
 }
 

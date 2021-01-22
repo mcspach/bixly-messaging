@@ -1,12 +1,24 @@
+//COLORS
+$yellow: #FFFE4E;
+$darkyellow: #FFE911;
+$white: #FFFEFE;
+$lightgrey: #abada9;
+$grey: #727473;
+$darkgrey: #383a3b;
+$black: #131414;
+
+
 form {
   padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: baseline;
-  margin: auto; 
-  border: 1px solid white;
-  background-color: lightblue;
+  margin: 15px auto; 
+  border: 1px solid $white;
+  background-color: $darkgrey;
+  color: $white;
+  box-shadow: 2px 2px 4px $grey;
 }
 
 button {
@@ -16,11 +28,13 @@ button {
   align-self: center;
   border-radius: 20px;
   border: none;
-  background-color: white;
+  background-color: $white;
+  box-shadow: 2px 2px 4px $grey;
 }
 
 form input {
   margin: 10px;
+  border-radius: 2px;
 }
 
 .WorkBox {
@@ -31,8 +45,8 @@ form input {
 .ListBox {
   width: 30%;
   height: 100%;
-  background-color: #282c34;
-  color: white;
+  background-color: $darkgrey;
+  color: $white;
   overflow: auto;
 }
 
@@ -45,10 +59,10 @@ form input {
 }
 
 .ListItem {
-  border: 1px solid white;
+  border: 1px solid $white;
   border-radius: 4px;
   margin: 4%;
-  background-color: #6e7788;
+  background-color: $lightgrey;
   list-style: none;
   align-self: center;
 }
