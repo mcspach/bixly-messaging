@@ -7,8 +7,8 @@ class Outbox extends Component {
     super(props)
   this.state = {
     messages: []
+    }
   }
-}
 
   // renderList = () => {
   //     if (this.props.tabName === 'received') {
@@ -29,16 +29,25 @@ class Outbox extends Component {
         this.setState({messages: response.data});
         console.log(this.state.messages);
         });
-      }
+  }
+
+  handleDelete = (messageId) => {
+    const newMessages = this.state.messages.filter(thing => thing.id !== messageId);
+    this.setState({ messages: newMessages });
+  }
+  
+  handleSelect = (messageId) => {
+    console.log(messageId);
+  }
   
 
   render() {
     return(
       <div className="List">
-        <h3>Messages</h3>
+        <h3>Inbox Messages</h3>
         <ul>
           {this.state.messages.map((message) => {
-            return <SmallMessage key={message.id} title={message.title} body={message.body} sender={message.sender} receiver={message.receiver} id={message.id} />
+            return <SmallMessage onSelect={this.handleSelect} onDelete={this.handleDelete} key={message.id} title={message.title} body={message.body} sender={message.sender} receiver={message.receiver} id={message.id} />
           })}
         </ul>
       </div>
