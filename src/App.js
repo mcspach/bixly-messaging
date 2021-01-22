@@ -31,9 +31,10 @@ handleLogin = (event) => {
   axios.post('https://messaging-test.bixly.com/api-token-auth/', {username: this.state.username, password: this.state.password})
     .then((response) => {
       // console.log(response.data);
-      this.setState({token: response.data.token, loggedInRedirect: true});
+      this.setState({token: response.data.token});
       console.log(this.state);
-      
+    }).then(response => {
+      this.setState({loggedInRedirect: true});
       axios.defaults.baseURL = 'https://messaging-test.bixly.com';
       axios.defaults.headers.common['Authorization'] = 'Token ' + this.state.token;
     })
