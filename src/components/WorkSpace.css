@@ -9,7 +9,7 @@ form {
   background-color: lightblue;
 }
 
-form button {
+button {
   width: 100px;
   margin: 10px;
   padding: 10px;
@@ -24,7 +24,7 @@ form input {
 }
 
 .WorkBox {
-  width: 100%;
+  width: 70%;
   height: 100%;
 }
 
@@ -33,16 +33,25 @@ form input {
   height: 100%;
   background-color: #282c34;
   color: white;
+  overflow: auto;
 }
 
 /* .MessageList {} */
 .List {
   width: 100%;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
+   */
 }
 
-.ListItem {}
+.ListItem {
+  border: 1px solid white;
+  border-radius: 4px;
+  margin: 4%;
+  background-color: #6e7788;
+  list-style: none;
+  align-self: center;
+}
 
 
 .MessageDetails {

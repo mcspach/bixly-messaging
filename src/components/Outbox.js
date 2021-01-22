@@ -15,8 +15,7 @@ class Outbox extends Component {
       .then((response) => {
         console.log(response.data);
         this.setState({messages: response.data});
-        console.log(this.state.messages)
-        this.renderList();
+        console.log(this.state.messages);
         });
       }
   
@@ -24,9 +23,9 @@ class Outbox extends Component {
   render() {
     return(
       <div className="List">
-        <p>Messages</p>
+        <h3>Messages</h3>
         <ul>
-          {this.state.currentTab.map((message) => {
+          {this.state.messages.map((message) => {
             return <SmallMessage key={message.id} title={message.title} body={message.body} sender={message.sender} receiver={message.receiver} id={message.id} />
           })}
         </ul>
