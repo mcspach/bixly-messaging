@@ -6,30 +6,39 @@ class MessageDetails extends Component {
     super(props);
 
     this.state = {
-      thisMessage: {}
+      message: {}
     }
   }
-  render() {
+  
+  fetchMessage = selectedMessageId => {
     axios.get(`/messages/${this.props.selectedMessageId}`)
-    .then((response) => { 
-      this.setState({thisMessage: response.data});
-      console.log(this.state.thisMessage);
-    })
-    if (this.state.thisMessage.id) {
+      .then((response) => { 
+        this.setState({message: response.data});
+        console.log(this.state.message);
+        console.log("state is set to fetched message");
+      });
+  }
+
+  render() {
+    if (this.props.selectedMessageId && (this.props.selectedMessageId !== this.state.message.id)) {
+      const id = this.props.selectedMessageId;
+      this.fetchMessage({id});
+
       return(
         <div className="MessageDetails">
-          {/* {this.renderMessage()} */}
-          <span>Title</span><h1>{this.state.thisMessage.title}</h1>
-          <span>Date</span><p>{this.state.thisMessage.sent}</p>
-          <span>Body</span><h6>{this.state.thisMessage.body}</h6>
-          <span>Sent by:</span><h1>{this.state.thisMessage.sender}</h1>
-          <span>Reveived by:</span><h1>{this.state.thisMessage.receiver}</h1>
+          <span>Title</span><h1>{this.state.message.title}</h1>
+          <span>Date</span><span>{this.state.message.sent}</span>
+          <span>Body</span><span>{this.state.message.body}</span>
+          <span>Sent by:</span><span>{this.state.message.sender}</span>
+          <span>Reveived by:</span><span>{this.state.message.receiver}</span>
         </div>
-      )
+      );
     } else {
+      console.log("It is choosing not to do the get()")
       return null;
     }
   }
 }
+
 
 export default MessageDetails;

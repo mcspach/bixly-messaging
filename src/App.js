@@ -55,7 +55,7 @@ redirect = () => {
 
 handleSelectMessage = async (messageId) => {
   console.log(messageId);
-  await this.setState({selectedMessageId: messageId});
+  this.setState({selectedMessageId: messageId});
   console.log(this.state);
 }
 
