@@ -11,6 +11,8 @@ export default class SmallMessage extends Component {
 
   handleSelect = event => {
     event.preventDefault();
+    // event.currentTarget.classList.add('Selected');
+    this.props.onSelect(event, this.props.id);
   }
 
   handleDelete = event => {

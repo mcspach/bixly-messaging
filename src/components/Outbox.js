@@ -6,7 +6,8 @@ class Outbox extends Component {
   constructor(props) {
     super(props)
   this.state = {
-    messages: []
+    messages: [],
+    selectedMessageId: props.selectedMessageId
   }
 }
 
@@ -24,18 +25,29 @@ class Outbox extends Component {
     this.setState({ messages: newMessages });
   }
 
-  handleSelect = (messageId) => {
+  handleSelect = (event, messageId) => {
     console.log(messageId);
   }
   
 
   render() {
+    const selectedMessageId = this.state.selectedMessageId;
+
     return(
       <div className="List">
         <h3>Messages</h3>
         <ul>
           {this.state.messages.map((message) => {
-            return <SmallMessage onSelect={this.handleSelect} onDelete={this.handleDelete} key={message.id} title={message.title} body={message.body} sender={message.sender} receiver={message.receiver} id={message.id} />
+            return <SmallMessage 
+            onSelect={this.handleSelect} 
+            onDelete={this.handleDelete}
+            selectedMessageId={selectedMessageId}
+            key={message.id} 
+            title={message.title} 
+            body={message.body} 
+            sender={message.sender} 
+            receiver={message.receiver} 
+            id={message.id} />
           })}
         </ul>
       </div>
