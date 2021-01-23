@@ -11,8 +11,11 @@ export default class SmallMessage extends Component {
 
   handleSelect = event => {
     event.preventDefault();
-    // event.currentTarget.classList.add('Selected');
+    if (event.currentTarget.classList.contains('Selected')) {
+      event.currentTarget.classList.remove('Selected');
+    } else {
     this.props.onSelect(event, this.props.id);
+    }
   }
 
   handleDelete = event => {

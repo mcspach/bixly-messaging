@@ -36,7 +36,6 @@ class Outbox extends Component {
       if (item.classList.contains('.Selected')) {
         item.classList.remove('.Selected');
       }
-      return
     })
     event.currentTarget.classList.toggle('Selected');
   }
