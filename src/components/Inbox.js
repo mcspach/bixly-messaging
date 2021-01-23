@@ -6,21 +6,11 @@ class Outbox extends Component {
   constructor(props) {
     super(props)
   this.state = {
-    messages: []
+    messages: [],
+    selectedMessageId: props.selectedMessageId
     }
   }
 
-  // renderList = () => {
-  //     if (this.props.tabName === 'received') {
-  //       this.setState({currentTab: this.state.messages.filter(m => m.receiver === 'test')});
-  //       console.log(this.state.currentTab);
-  //     } else if (this.props.tabName === 'sent') { 
-  //       this.setState({currentTab: this.state.messages.filter(m => m.sender === 'test')});
-  //       console.log(this.state.currentTab);
-  //     } else {
-  //       return null;
-  //     }
-  // }
 
   componentDidMount() {
     axios.get('/messages/')
@@ -36,18 +26,40 @@ class Outbox extends Component {
     this.setState({ messages: newMessages });
   }
   
-  handleSelect = (messageId) => {
+  handleSelect = async (event, messageId) => {
     console.log(messageId);
+    this.props.onSelect(messageId);
+    let list = [...document.querySelectorAll(".ListItem")]
+    console.log(list);
+    list.forEach((item) => {
+      console.log(item)
+      if (item.classList.contains('.Selected')) {
+        item.classList.remove('.Selected');
+      }
+      return
+    })
+    event.currentTarget.classList.toggle('Selected');
   }
   
 
   render() {
+    const selectedMessageId = this.state.selectedMessageId;
+
     return(
       <div className="List">
         <h3>Inbox Messages</h3>
         <ul>
           {this.state.messages.map((message) => {
-            return <SmallMessage onSelect={this.handleSelect} onDelete={this.handleDelete} key={message.id} title={message.title} body={message.body} sender={message.sender} receiver={message.receiver} id={message.id} />
+            return <SmallMessage 
+              onSelect={this.handleSelect} 
+              onDelete={this.handleDelete}
+              selectedMessageId={selectedMessageId} 
+              key={message.id} 
+              title={message.title} 
+              body={message.body} 
+              sender={message.sender} 
+              receiver={message.receiver} 
+              id={message.id} />
           })}
         </ul>
       </div>

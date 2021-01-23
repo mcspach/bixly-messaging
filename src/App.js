@@ -21,7 +21,7 @@ export default class App extends Component {
         password: "",
         token: "",
         loggedInRedirect: false,
-        selectedMessage: null
+        selectedMessageId: null
     };
 }
 
@@ -39,6 +39,12 @@ handleLogin = (event) => {
     })
 }
 
+handleChange = (event) => {
+  event.preventDefault();
+  this.setState({ [event.target.name]: event.target.value });
+  console.log(this.state);
+}
+
 redirect = () => {
   if (this.state.loggedInRedirect) {
     return( 
@@ -47,11 +53,12 @@ redirect = () => {
   } 
 }
 
-handleChange = (event) => {
-  event.preventDefault();
-  this.setState({ [event.target.name]: event.target.value });
+handleSelectMessage = async (messageId) => {
+  console.log(messageId);
+  await this.setState({selectedMessageId: messageId});
   console.log(this.state);
 }
+
 
 render() {
 
@@ -105,17 +112,18 @@ render() {
 
         <div className="Workspace">
 
+          {/* Listbox need to be a switch */}
           <div className="ListBox">
             <Route path="/messages/home" exact render={() => null} />
-            <Route path="/messages" exact render={() => 
-            <ErrorBoundary><Inbox /></ErrorBoundary>} />
+            <Route path="/messages/" exact render={() => 
+            <ErrorBoundary><Inbox onSelect={this.handleSelectMessage} /></ErrorBoundary>} />
             <Route path="/messages/sent" exact render={() => 
-            <ErrorBoundary><Outbox /></ErrorBoundary>} />
+            <ErrorBoundary><Outbox onSelect={this.handleSelectMessage} /></ErrorBoundary>} />
           </div>
 
           <div className="WorkBox">
           <Route path="/messages/" exact render={() => 
-          <ErrorBoundary><MessageDetails /></ErrorBoundary>} />
+          <ErrorBoundary><MessageDetails selectedMessageId={this.state.selectedMessageId} /></ErrorBoundary>} />
           <Route path="/messages/new" exact render={() =>
           <NewMessageForm />} />
           </div>
