@@ -4,14 +4,15 @@ Hello World
 
 -In your CLI, 'cd' to the top leve folder of this repo.
 -Please run:
-  $ yarn install
+  ### yarn install
 
-  you are then able to run '$ yarn start' to open a local dev server, which will should appear at localhost/3000
+  ### yarn start 
+will open a local dev server, which will should appear at localhost/3000
 
 -Using the login form, sign in with credentials:
 
-username: test
-password: test123!
+## username: test
+## password: test123!
 
 When you have signed in, you can load your messages, etc.
 
