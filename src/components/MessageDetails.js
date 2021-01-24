@@ -15,9 +15,7 @@ class MessageDetails extends Component {
     axios.get(`/messages/${selectedMessageId}`)
     .then((response) => { 
       this.setState({message: response.data});
-      console.log(this.state.message.title + ' details has updated state');
     }).catch((error => {
-      console.log(error);
       this.setState({error: true})
     }))
   }
@@ -37,7 +35,7 @@ class MessageDetails extends Component {
   };
 
   render() {
-      let details = <p>click on a message from the list to view details</p>
+      let details = <div><p>Hello</p><p>click on a message from the list to view details</p></div>
       if (!this.state.error && this.state.message) {
        details = (<div className="MessageDetails">
         <h3>Title: {this.state.message.title}</h3>

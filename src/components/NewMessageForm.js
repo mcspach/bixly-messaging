@@ -9,28 +9,26 @@ class NewMessageForm extends Component {
         title: "",
         body: "",
         receiver: "",
-        id: ""
+        id: "",
+        error: false
     }
   }
 
   handlePostMessage = (event) => {
     event.preventDefault();
-
     axios.post('/messages/', {
       title: this.state.title,
       body: this.state.body,
       receiver: this.state.receiver
     }).then((response) => {
-        console.log(response);
         this.setState({id: response.data.id})
-      })
-
+      }).catch(error => 
+        this.setState({error: true}));
   }
 
   handleChange = (event) => {
     event.preventDefault();
     this.setState({ [event.target.name]: event.target.value });
-    console.log(this.state);
   }
 
   render() {
@@ -47,6 +45,7 @@ class NewMessageForm extends Component {
     } else {
       return(
         <div className="NewMessageForm">
+          <p>Thanks.</p>
           <p>Your message was sent.</p>
         </div>
       )
