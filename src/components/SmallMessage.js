@@ -15,8 +15,7 @@ export default class SmallMessage extends Component {
 
   handleDelete = event => {
     event.preventDefault();
-    const response = axios.delete(`/messages/${this.props.id}`);
-    console.log(response.data);
+    axios.delete(`/messages/${this.props.id}`);
     alert('You deleted a message.');
     this.props.onDelete(this.props.id);
   }

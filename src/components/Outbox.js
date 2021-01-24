@@ -15,7 +15,6 @@ componentDidMount() {
   axios.get('/messages/sent')
     .then((response) => {
       this.setState({messages: response.data});
-      console.log(this.state.messages);
       }).catch(error =>
         console.log(error));
 }
@@ -26,10 +25,8 @@ handleDelete = (messageId) => {
 }
 
 handleSelect = (event, messageId) => {
-  console.log(messageId);
   this.props.onSelect(messageId);
   let list = [...document.querySelectorAll(".ListItem")]
-  console.log(list);
   list.forEach((item) => {
       item.classList.remove('Selected');
   })

@@ -26,22 +26,18 @@ export default class App extends Component {
 
 handleLogin = (event) => {
   event.preventDefault();
-
   axios.post('https://messaging-test.bixly.com/api-token-auth/', {username: this.state.username, password: this.state.password})
     .then((response) => {
       // console.log(response.data);
       this.setState({token: response.data.token, loggedInRedirect: true});
-      console.log(this.state);
       axios.defaults.baseURL = 'https://messaging-test.bixly.com';
       axios.defaults.headers.common['Authorization'] = 'Token ' + this.state.token;
-      console.log(this.state);
     })
 }
 
 handleChange = (event) => {
   event.preventDefault();
   this.setState({ [event.target.name]: event.target.value });
-  console.log(this.state);
 }
 
 redirect = () => {
@@ -54,9 +50,7 @@ redirect = () => {
 
 
 handleSelectMessage = async (messageId) => {
-  console.log('app is running handleSelectedMessgae');
   await this.setState({selectedMessageId: messageId});
-  console.log(this.state);
 }
 
 
@@ -110,7 +104,6 @@ render() {
 
           <div className="Workspace">
 
-            {/* Listbox needs to be a switch */}
             <div className="ListBox">
               <Route path="/messages/home" exact render={() => null} />
               <Route path="/messages/" exact render={() => 
