@@ -52,6 +52,7 @@ redirect = () => {
   } 
 }
 
+
 handleSelectMessage = (messageId) => {
   console.log('app is running handleSelectedMessgae');
   this.setState({selectedMessageId: messageId});

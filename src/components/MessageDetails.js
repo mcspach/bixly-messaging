@@ -6,7 +6,7 @@ class MessageDetails extends Component {
     super(props);
 
     this.state = {
-      thisMessage: {}
+      message: {}
     }
   }
 
@@ -42,5 +42,6 @@ class MessageDetails extends Component {
       )
   }
 }
+
 
 export default MessageDetails;
