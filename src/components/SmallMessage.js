@@ -2,12 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 export default class SmallMessage extends Component {
-  // props.title,
-  // props.body,
-  // props.message,
-  // props.id,
-  // props.sender,
-  // props.receiver
+  // props.title, body, message, id, sender, receiver, sent
 
   handleSelect = event => {
     event.preventDefault();
@@ -19,13 +14,11 @@ export default class SmallMessage extends Component {
   }
 
   handleDelete = event => {
-  event.preventDefault();
-  //
-  const response = axios.delete(`/messages/${this.props.id}`);
-  console.log(response);
-  console.log(response.data);
-  alert('You deleted a message.');
-  this.props.onDelete(this.props.id);
+    event.preventDefault();
+    const response = axios.delete(`/messages/${this.props.id}`);
+    console.log(response.data);
+    alert('You deleted a message.');
+    this.props.onDelete(this.props.id);
   }
 
   render() {
