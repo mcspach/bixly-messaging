@@ -17,7 +17,8 @@ class Inbox extends Component {
       .then((response) => {
         this.setState({messages: response.data});
         console.log(this.state.messages);
-        });
+        }).catch(error =>
+          console.log(error));
   }
 
   handleDelete = (messageId) => {

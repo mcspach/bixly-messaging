@@ -6,7 +6,8 @@ class MessageDetails extends Component {
     super(props);
 
     this.state = {
-      message: {}
+      message: null,
+      error: false
     }
   }
 
@@ -15,30 +16,39 @@ class MessageDetails extends Component {
     .then((response) => { 
       this.setState({message: response.data});
       console.log(this.state.message.title + ' details has updated state');
-    })
+    }).catch((error => {
+      console.log(error);
+      this.setState({error: true})
+    }))
   }
 
   componentDidMount() {
-      this.handleShowMessage(this.props.selectedMessageId);
-  };
-
-  componentWillReceiveProps() {
-    if (this.props.selectedMessageId !== this.state.message.id) {
+    if ( this.props.selectedMessageId ) {
       this.handleShowMessage(this.props.selectedMessageId);
     }
   };
 
-  render() {
+  componentDidUpdate() {
+    if ( this.props.selectedMessageId ) {
+      if ( !this.state.message || (this.state.message && this.props.selectedMessageId !== this.state.message.id)) {
+        this.handleShowMessage(this.props.selectedMessageId);
+      }
+    }
+  };
 
-      return(
-        <div className="MessageDetails">
-          <p>Title: {this.state.message.title}</p>
-          <p>Date: {this.state.message.sent}</p>
-          <p>Body: {this.state.message.body}</p>
-          <p>Sent by: {this.state.message.sender}</p>
-          <p>Reveived by: {this.state.message.receiver}</p>
-        </div>
-      )
+  render() {
+      let details = <p>click on a message from the list to view details</p>
+      if (!this.state.error && this.state.message) {
+       details = (<div className="MessageDetails">
+        <h3>Title: {this.state.message.title}</h3>
+        <p><strong>Body:</strong> {this.state.message.body}</p>
+        <p>Sent by: {this.state.message.sender}</p>
+        <p>Reveived by: {this.state.message.receiver}</p>
+        <p>Timestamp: {this.state.message.sent}</p>
+      </div> 
+      );
+    }
+  return details;
   }
 }
 
