@@ -9,34 +9,37 @@ class MessageDetails extends Component {
       message: {}
     }
   }
-  
-  fetchMessage = selectedMessageId => {
-    axios.get(`/messages/${this.props.selectedMessageId}`)
-      .then((response) => { 
-        this.setState({message: response.data});
-        console.log(this.state.message);
-        console.log("state is set to fetched message");
-      });
+
+  handleShowMessage(selectedMessageId) {
+    axios.get(`/messages/${selectedMessageId}`)
+    .then((response) => { 
+      this.setState({thisMessage: response.data});
+      console.log(this.state.thisMessage.title + 'details has updated state');
+    })
   }
 
-  render() {
-    if (this.props.selectedMessageId && (this.props.selectedMessageId !== this.state.message.id)) {
-      const id = this.props.selectedMessageId;
-      this.fetchMessage({id});
+  componentDidMount() {
+    if (this.state.thisMessage) {
+      this.handleShowMessage(this.props.selectedMessageId);
+    }
+  };
 
+  componentWillReceiveProps() {
+    if ((this.state.thisMessage !== {}) && (this.props.selectedMessageid !== this.state.thisMessage.id)) {
+      this.handleShowMessage(this.props.selectedMessageId);
+    }
+  };
+
+  render() {
       return(
         <div className="MessageDetails">
-          <span>Title</span><h1>{this.state.message.title}</h1>
-          <span>Date</span><span>{this.state.message.sent}</span>
-          <span>Body</span><span>{this.state.message.body}</span>
-          <span>Sent by:</span><span>{this.state.message.sender}</span>
-          <span>Reveived by:</span><span>{this.state.message.receiver}</span>
+          <p>Title: {this.state.thisMessage.title}</p>
+          <p>Date: {this.state.thisMessage.sent}</p>
+          <p>Body: {this.state.thisMessage.body}</p>
+          <p>Sent by: {this.state.thisMessage.sender}</p>
+          <p>Reveived by: {this.state.thisMessage.receiver}</p>
         </div>
-      );
-    } else {
-      console.log("It is choosing not to do the get()")
-      return null;
-    }
+      )
   }
 }
 

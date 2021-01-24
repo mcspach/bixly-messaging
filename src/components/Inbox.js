@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import SmallMessage from './SmallMessage';
 
-class Outbox extends Component {
+class Inbox extends Component {
   constructor(props) {
     super(props)
   this.state = {
@@ -15,7 +15,6 @@ class Outbox extends Component {
   componentDidMount() {
     axios.get('/messages/')
       .then((response) => {
-        console.log(response.data);
         this.setState({messages: response.data});
         console.log(this.state.messages);
         });
@@ -26,16 +25,13 @@ class Outbox extends Component {
     this.setState({ messages: newMessages });
   }
   
-  handleSelect = async (event, messageId) => {
+  handleSelect = (event, messageId) => {
     console.log(messageId);
     this.props.onSelect(messageId);
     let list = [...document.querySelectorAll(".ListItem")]
     console.log(list);
     list.forEach((item) => {
-      console.log(item)
-      if (item.classList.contains('.Selected')) {
-        item.classList.remove('.Selected');
-      }
+        item.classList.remove('Selected');
     })
     event.currentTarget.classList.toggle('Selected');
   }
@@ -66,4 +62,4 @@ class Outbox extends Component {
   }
 }
 
-export default Outbox;
+export default Inbox;
