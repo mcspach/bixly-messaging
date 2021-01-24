@@ -49,6 +49,13 @@ form input {
   background-color: $darkgrey;
   color: $darkgrey;
   overflow: auto;
+
+  h3 {
+    color: $white;
+  }
+  ul {
+    padding: 4px;
+  }
 }
 
 /* .MessageList {} */

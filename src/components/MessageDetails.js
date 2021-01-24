@@ -23,7 +23,7 @@ class MessageDetails extends Component {
   };
 
   componentWillReceiveProps() {
-    if (this.props.selectedMessageid !== this.state.message.id) {
+    if (this.props.selectedMessageId !== this.state.message.id) {
       this.handleShowMessage(this.props.selectedMessageId);
     }
   };
