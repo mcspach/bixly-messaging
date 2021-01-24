@@ -33,7 +33,7 @@ class Inbox extends Component {
     list.forEach((item) => {
         item.classList.remove('Selected');
     })
-    event.currentTarget.classList.toggle('Selected');
+    event.currentTarget.classList.add('Selected');
   }
   
 

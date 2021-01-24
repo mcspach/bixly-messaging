@@ -11,48 +11,54 @@ class Outbox extends Component {
   }
 }
 
-  componentDidMount() {
-    axios.get('/messages/sent')
-      .then((response) => {
-        console.log(response.data);
-        this.setState({messages: response.data});
-        console.log(this.state.messages);
-        });
-      }
+componentDidMount() {
+  axios.get('/messages/sent')
+    .then((response) => {
+      this.setState({messages: response.data});
+      console.log(this.state.messages);
+      });
+}
 
-  handleDelete = (messageId) => {
-    const newMessages = this.state.messages.filter(thing => thing.id !== messageId);
-    this.setState({ messages: newMessages });
-  }
+handleDelete = (messageId) => {
+  const newMessages = this.state.messages.filter(thing => thing.id !== messageId);
+  this.setState({ messages: newMessages });
+}
 
-  handleSelect = (event, messageId) => {
-    console.log(messageId);
-  }
+handleSelect = (event, messageId) => {
+  console.log(messageId);
+  this.props.onSelect(messageId);
+  let list = [...document.querySelectorAll(".ListItem")]
+  console.log(list);
+  list.forEach((item) => {
+      item.classList.remove('Selected');
+  })
+  event.currentTarget.classList.add('Selected');
+}
+
+
+render() {
+  const selectedMessageId = this.state.selectedMessageId;
   
-
-  render() {
-    const selectedMessageId = this.state.selectedMessageId;
-
-    return(
-      <div className="List">
-        <h3>Messages</h3>
-        <ul>
-          {this.state.messages.map((message) => {
-            return <SmallMessage 
+  return(
+    <div className="List">
+      <h3>Inbox Messages</h3>
+      <ul>
+        {this.state.messages.map((message) => {
+          return <SmallMessage 
             onSelect={this.handleSelect} 
             onDelete={this.handleDelete}
-            selectedMessageId={selectedMessageId}
+            selectedMessageId={selectedMessageId} 
             key={message.id} 
             title={message.title} 
             body={message.body} 
             sender={message.sender} 
             receiver={message.receiver} 
             id={message.id} />
-          })}
-        </ul>
-      </div>
-    )
-  }
+        })}
+      </ul>
+    </div>
+  )
+}
 }
 
 export default Outbox;

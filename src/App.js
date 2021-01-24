@@ -53,9 +53,9 @@ redirect = () => {
 }
 
 
-handleSelectMessage = (messageId) => {
+handleSelectMessage = async (messageId) => {
   console.log('app is running handleSelectedMessgae');
-  this.setState({selectedMessageId: messageId});
+  await this.setState({selectedMessageId: messageId});
   console.log(this.state);
 }
 
@@ -125,17 +125,14 @@ render() {
 
             <div className="WorkBox">
             <Route path="/messages/" exact render={() => 
-              <ErrorBoundary>
                 <MessageDetails selectedMessageId={this.state.selectedMessageId} />
-              </ErrorBoundary>} />
+              } />
             <Route path="/messages/sent/" exact render={() => 
-              <ErrorBoundary>
                 <MessageDetails selectedMessageId={this.state.selectedMessageId} />
-              </ErrorBoundary>} />
+              } />
             <Route path="/messages/new" exact render={() =>
-              <ErrorBoundary>
               <NewMessageForm />
-              </ErrorBoundary>} />
+              } />
             </div>
 
         </div>
