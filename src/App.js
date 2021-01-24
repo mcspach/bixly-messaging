@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import axios from 'axios';
 
-import logo from './logo.svg';
 import './App.scss';
 
 import Tab from './components/Tab';
@@ -48,14 +47,14 @@ handleChange = (event) => {
 redirect = () => {
   if (this.state.loggedInRedirect) {
     return( 
-      <ErrorBoundary><Redirect from="/" to="/messages/" /></ErrorBoundary>
+      <Redirect from="/" to="/messages/" />
     )
   } 
 }
 
-handleSelectMessage = async (messageId) => {
-  console.log(messageId);
-  await this.setState({selectedMessageId: messageId});
+handleSelectMessage = (messageId) => {
+  console.log('app is running handleSelectedMessgae');
+  this.setState({selectedMessageId: messageId});
   console.log(this.state);
 }
 
@@ -75,7 +74,6 @@ render() {
     <div className="App">
       <Router>
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
           <p> Bixly Messenger </p>
         </header>
         <div className="WorkSpace">
@@ -95,12 +93,11 @@ render() {
   } else {
     return(
       <div className="App">
-      <Router>
-      {redirect()}
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p> Bixly Messenger </p>
-        </header>
+        <Router>
+          {redirect()}
+          <header className="App-header">
+            <p> Bixly Messenger </p>
+          </header>
 
         <Route path="/messages" render={() => 
             <div className="Tabs">
@@ -110,23 +107,35 @@ render() {
             </div>
         } />
 
-        <div className="Workspace">
+          <div className="Workspace">
 
-          {/* Listbox need to be a switch */}
-          <div className="ListBox">
-            <Route path="/messages/home" exact render={() => null} />
+            {/* Listbox needs to be a switch */}
+            <div className="ListBox">
+              <Route path="/messages/home" exact render={() => null} />
+              <Route path="/messages/" exact render={() => 
+              <ErrorBoundary>
+                <Inbox onSelect={this.handleSelectMessage} />
+              </ErrorBoundary>} />
+              <Route path="/messages/sent" exact render={() => 
+              <ErrorBoundary>
+                <Outbox onSelect={this.handleSelectMessage} />
+              </ErrorBoundary>} />
+            </div>
+
+            <div className="WorkBox">
             <Route path="/messages/" exact render={() => 
-            <ErrorBoundary><Inbox onSelect={this.handleSelectMessage} /></ErrorBoundary>} />
-            <Route path="/messages/sent" exact render={() => 
-            <ErrorBoundary><Outbox onSelect={this.handleSelectMessage} /></ErrorBoundary>} />
-          </div>
-
-          <div className="WorkBox">
-          <Route path="/messages/" exact render={() => 
-          <ErrorBoundary><MessageDetails selectedMessageId={this.state.selectedMessageId} /></ErrorBoundary>} />
-          <Route path="/messages/new" exact render={() =>
-          <NewMessageForm />} />
-          </div>
+              <ErrorBoundary>
+                <MessageDetails selectedMessageId={this.state.selectedMessageId} />
+              </ErrorBoundary>} />
+            <Route path="/messages/sent/" exact render={() => 
+              <ErrorBoundary>
+                <MessageDetails selectedMessageId={this.state.selectedMessageId} />
+              </ErrorBoundary>} />
+            <Route path="/messages/new" exact render={() =>
+              <ErrorBoundary>
+              <NewMessageForm />
+              </ErrorBoundary>} />
+            </div>
 
         </div>
       </Router>

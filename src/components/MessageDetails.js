@@ -9,26 +9,37 @@ class MessageDetails extends Component {
       thisMessage: {}
     }
   }
-  render() {
-    axios.get(`/messages/${this.props.selectedMessageId}`)
+
+  handleShowMessage(selectedMessageId) {
+    axios.get(`/messages/${selectedMessageId}`)
     .then((response) => { 
       this.setState({thisMessage: response.data});
-      console.log(this.state.thisMessage);
+      console.log(this.state.thisMessage.title + 'details has updated state');
     })
-    if (this.state.thisMessage.id) {
+  }
+
+  componentDidMount() {
+    if (this.state.thisMessage) {
+      this.handleShowMessage(this.props.selectedMessageId);
+    }
+  };
+
+  componentWillReceiveProps() {
+    if ((this.state.thisMessage !== {}) && (this.props.selectedMessageid !== this.state.thisMessage.id)) {
+      this.handleShowMessage(this.props.selectedMessageId);
+    }
+  };
+
+  render() {
       return(
         <div className="MessageDetails">
-          {/* {this.renderMessage()} */}
-          <span>Title</span><h1>{this.state.thisMessage.title}</h1>
-          <span>Date</span><p>{this.state.thisMessage.sent}</p>
-          <span>Body</span><h6>{this.state.thisMessage.body}</h6>
-          <span>Sent by:</span><h1>{this.state.thisMessage.sender}</h1>
-          <span>Reveived by:</span><h1>{this.state.thisMessage.receiver}</h1>
+          <p>Title: {this.state.thisMessage.title}</p>
+          <p>Date: {this.state.thisMessage.sent}</p>
+          <p>Body: {this.state.thisMessage.body}</p>
+          <p>Sent by: {this.state.thisMessage.sender}</p>
+          <p>Reveived by: {this.state.thisMessage.receiver}</p>
         </div>
       )
-    } else {
-      return null;
-    }
   }
 }
 

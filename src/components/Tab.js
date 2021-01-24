@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 class Tab extends Component {
   render() {
     return (
-      <button className="BtnTab">
-        <Link to={`/${this.props.tabRoute}`}>
+      <Link to={`/${this.props.tabRoute}`}>
+        <button className="BtnTab">
           {this.props.tabName}
-        </Link>
-      </button>
+        </button>
+      </Link>
     )
   }
 }
